@@ -2,15 +2,14 @@
 using namespace std;
 using ll = long long;
 
-int mean(vector<int> &a,int n)
+double mean(vector<int> &a,int n)
 {
-  sort(begin(a), end(a));
   double sum = accumulate(begin(a), end(a), 0);
   double average = sum / n;
   return average;
 }
 
-int median(vector<int> &a,int n)
+double median(vector<int> &a,int n)
 {
     double medians = a[n / 2];
     if (! (n & 1)) {
@@ -44,7 +43,7 @@ int mode(vector<int> &a,int n)
     return res;
 }
 
-int covariance(vector<int> &a,vector<int> &b,int n)
+double covariance(vector<int> &a,vector<int> &b,int n)
 {
     double sum = 0;
     double mean_arr1 = mean(a, n);
@@ -54,7 +53,7 @@ int covariance(vector<int> &a,vector<int> &b,int n)
     return sum / (n - 1);
 }
 
-int standarddeviation(vector<int> &a)
+float standarddeviation(vector<int> &a)
 {
     
     float sum = 0.0, mean, sd = 0.0;
@@ -64,10 +63,11 @@ int standarddeviation(vector<int> &a)
     {
         sum = sum + a[i];  
     }
-    mean = sum/10;  
+    int n = a.size();
+    mean = sum/n;  
     for(i = 0; i < a.size(); ++i)
         sd = sd + pow(a[i] - mean, 2);  
-    return sqrt(sd / 10);
+    return sqrt(sd / n);
 }
 
 
@@ -88,11 +88,11 @@ void solve(){
            cin>>b[i];
        }
        
-       cout<<"Mean : "<<mean(a,n)<<"\n";
-       cout<<"Median : "<<median(a,n)<<"\n";
-       cout<<"Mode : "<<mode(a,n)<<"\n";
-       cout<<"Covariance : "<<covariance(a,b,n)<<"\n";
-       cout<<"Standarddeviation : "<<standarddeviation(a)<<"\n";
+       cout<<"Mean : "<<setprecision(2)<<fixed<<mean(a,n)<<"\n";
+       cout<<"Median : "<<setprecision(2)<<fixed<<median(a,n)<<"\n";
+       cout<<"Mode : "<<setprecision(2)<<fixed<<mode(a,n)<<"\n";
+       cout<<"Covariance : "<<setprecision(2)<<fixed<<covariance(a,b,n)<<"\n";
+       cout<<"Standarddeviation : "<<setprecision(2)<<fixed<<standarddeviation(a)<<"\n";
    }
 }
 
